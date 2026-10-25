@@ -3,7 +3,7 @@ from typing import Literal
 from pydantic import BaseModel
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from model import llm_modl
+from model import llm_modl, invoke_structured
 from state import ResearchPilotState
 
 
@@ -43,7 +43,7 @@ def verify_citations(state: ResearchPilotState) -> dict:
         ),
     ]
 
-    response = verifier_llm.invoke(messages)
+    response = invoke_structured(verifier_llm, messages)
 
     checks = [
         item.model_dump()

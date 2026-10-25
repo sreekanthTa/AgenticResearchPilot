@@ -1,7 +1,7 @@
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
 
-from model import llm_modl
+from model import llm_modl, invoke_structured
 from state import ResearchPilotState
 
 
@@ -74,7 +74,7 @@ def analyze(state: ResearchPilotState) -> dict:
         ),
     ]
 
-    response = analyzer_llm.invoke(messages)
+    response = invoke_structured(analyzer_llm, messages)
 
     return {
         "analysis": response.model_dump_json(),

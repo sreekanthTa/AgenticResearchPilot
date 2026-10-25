@@ -9,3 +9,12 @@ llm_modl = ChatGroq(
     max_tokens=1024,
     reasoning_effort="low",
 )
+
+
+def invoke_structured(llm, messages, attempts: int = 3):
+    for attempt in range(attempts):
+        try:
+            return llm.invoke(messages)
+        except Exception:
+            if attempt == attempts - 1:
+                raise

@@ -1,7 +1,7 @@
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel
 
-from model import llm_modl
+from model import llm_modl, invoke_structured
 from state import ResearchPilotState
 
 
@@ -32,11 +32,12 @@ said in this conversation, such as the user's name, when it is relevant.
 
 
 def guard(state: ResearchPilotState) -> dict:
-    response = classifier_llm.invoke(
+    response = invoke_structured(
+        classifier_llm,
         [
             SystemMessage(content=sys_prm),
             HumanMessage(content=state["question"]),
-        ]
+        ],
     )
 
     return {"is_research": response.is_research}
