@@ -1,0 +1,2 @@
+- Pushes back on generous token/limit settings when they threaten API quota; wants the smallest `max_tokens` (or similar cap) that still works rather than a large safety margin. Confidence: 0.65
+- When trying to understand code flow / architecture, prefers visual explanations such as flowcharts/diagrams over prose. Confidence: 0.55

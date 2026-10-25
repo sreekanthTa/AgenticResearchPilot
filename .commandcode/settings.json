@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(python -c \"import graph\")",
+      "Shell(Remove-Item:*)",
+      "Shell(Get-ChildItem:*)",
+      "powershell"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}
