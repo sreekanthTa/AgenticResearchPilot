@@ -13,8 +13,6 @@ from analyze import analyze
 from citation import verify_citations
 from report import build_report
 
-checkpointer = InMemorySaver()
-
 
 def route_intent(state: ResearchPilotState) -> Literal["plan", "chat"]:
     return "plan" if state.get("is_research") else "chat"
@@ -34,7 +32,7 @@ def route_verification(state: ResearchPilotState) -> Literal["report", "analyze"
     return "analyze"
 
 
-def build_graph():
+def build_graph(checkpointer=None):
     builder = StateGraph(ResearchPilotState)
 
     builder.add_node("guard", guard)
@@ -72,10 +70,13 @@ def build_graph():
 
     builder.add_edge("report", END)
 
+    if checkpointer is None:
+        return builder.compile()
+
     return builder.compile(checkpointer=checkpointer)
 
 
-graph = build_graph()
+graph = build_graph(InMemorySaver())
 
 
 config = {"configurable": {"thread_id": "sreekanth-1"}}
