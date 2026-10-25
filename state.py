@@ -1,5 +1,6 @@
-from typing import TypedDict
+from typing import Annotated, TypedDict
 
+from langgraph.graph.message import add_messages
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -21,6 +22,8 @@ class ResearchInput(BaseModel):
 
 class ResearchPilotState(TypedDict):
     question: str
+    is_research: bool
+    messages: Annotated[list, add_messages]
     tasks: list[str]
     search_results: list[dict]
     analysis: str

@@ -1,5 +1,7 @@
 import json
 
+from langchain_core.messages import AIMessage
+
 from state import ResearchPilotState
 
 
@@ -25,4 +27,6 @@ def build_report(state: ResearchPilotState) -> dict:
         for limitation in analysis["limitations"]:
             lines.append(f"- {limitation}")
 
-    return {"report": "\n".join(lines)}
+    text = "\n".join(lines)
+
+    return {"report": text, "messages": [AIMessage(content=text)]}
