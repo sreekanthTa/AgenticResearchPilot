@@ -30,12 +30,16 @@ def apply_theme(theme: str) -> None:
     if dark:
         background = "#0e1117"
         panel = "#262730"
+        border = "#3d3d4d"
         text = "#fafafa"
+        muted = "#b8bcc4"
         scheme = "dark"
     else:
         background = "#ffffff"
         panel = "#f0f2f6"
+        border = "#d5d8de"
         text = "#31333f"
+        muted = "#5b5f68"
         scheme = "light"
 
     st.markdown(
@@ -57,22 +61,57 @@ def apply_theme(theme: str) -> None:
             background-color: {panel};
         }}
         [data-testid="stSidebar"] *,
-        .stMarkdown,
-        .stMarkdown p,
+        .stMarkdown, .stMarkdown p,
         h1, h2, h3, h4, h5, h6 {{
             color: {text};
         }}
+        [data-testid="stCaptionContainer"],
+        [data-testid="stCaptionContainer"] *,
+        small {{
+            color: {muted} !important;
+        }}
+        .stButton > button,
+        [data-testid="stBaseButton-secondary"],
+        [data-testid="stBaseButton-primary"] {{
+            background-color: {panel};
+            color: {text};
+            border: 1px solid {border};
+        }}
+        .stButton > button:hover {{
+            border-color: {text};
+            color: {text};
+        }}
+        textarea, input,
+        [data-baseweb="input"], [data-baseweb="textarea"], [data-baseweb="base-input"] {{
+            background-color: {panel};
+            color: {text};
+        }}
+        ::placeholder {{
+            color: {muted} !important;
+        }}
         [data-testid="stChatMessage"] {{
             background-color: {panel};
+        }}
+        [data-testid="stChatInput"] {{
+            background-color: {background};
         }}
         [data-testid="stChatInput"] textarea,
         [data-testid="stChatInput"] > div {{
             background-color: {panel};
             color: {text};
         }}
-        textarea, input {{
-            background-color: {panel};
+        [data-testid="stChatInputSubmitButton"],
+        [data-testid="stChatInputSubmitButton"] svg {{
             color: {text};
+            fill: {text};
+        }}
+        [data-testid="stBottom"],
+        [data-testid="stBottom"] > div,
+        [data-testid="stBottomBlockContainer"] {{
+            background-color: {background};
+        }}
+        body {{
+            background-color: {background};
         }}
         </style>
         """,
