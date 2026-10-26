@@ -4,9 +4,9 @@ from ddgs import DDGS
 
 from state import ResearchPilotState
 
-MAX_PER_TASK = 3
-MAX_SOURCES = 12
-MAX_SNIPPET = 300
+MAX_PER_TASK = 2
+MAX_SOURCES = 6
+MAX_SNIPPET = 200
 MAX_TITLE = 100
 
 
