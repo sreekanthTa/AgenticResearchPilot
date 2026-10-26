@@ -65,7 +65,11 @@ def build_checkpointer() -> PostgresSaver:
             if _pool is None:
                 _pool = ConnectionPool(
                     conninfo=dsn(),
+                    min_size=1,
                     max_size=5,
+                    max_idle=60,
+                    max_lifetime=300,
+                    check=ConnectionPool.check_connection,
                     configure=_set_search_path,
                     kwargs={
                         "autocommit": True,
